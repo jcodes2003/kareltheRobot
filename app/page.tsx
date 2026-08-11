@@ -204,6 +204,7 @@ export default function Home() {
   const [carriedBeepers, setCarriedBeepers] = useState(0);
   const [message, setMessage] = useState("Ready to run your robot script.");
   const [error, setError] = useState<string | null>(null);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const runScript = () => {
     const commands = parseCommands(script);
@@ -275,6 +276,7 @@ export default function Home() {
             setCarriedBeepers(0);
             setError(null);
             setMessage("You dropped the beeper into the hole — world reset.");
+            setShowSuccessModal(true);
             return;
           }
         }
@@ -330,6 +332,23 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-zinc-950 px-4 py-10 text-zinc-100 sm:px-6 lg:px-8">
+      {showSuccessModal ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+          <div className="w-full max-w-md rounded-3xl bg-zinc-950 p-6 shadow-2xl shadow-black/70">
+            <h2 className="text-2xl font-semibold text-emerald-300">Success!</h2>
+            <p className="mt-3 text-sm leading-6 text-zinc-200">
+              The robot dropped the beeper into the hole and the world was reset with new placements.
+            </p>
+            <button
+              type="button"
+              onClick={() => setShowSuccessModal(false)}
+              className="mt-6 inline-flex rounded-full bg-emerald-500 px-5 py-2 text-sm font-semibold text-zinc-950 transition hover:bg-emerald-400"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      ) : null}
       <div className="mx-auto flex max-w-6xl flex-col gap-6 rounded-3xl border border-zinc-800 bg-zinc-900/80 p-6 shadow-2xl shadow-black/30">
         <header className="space-y-2">
           <p className="text-sm uppercase tracking-[0.35em] text-emerald-400">Karel-inspired robot</p>
