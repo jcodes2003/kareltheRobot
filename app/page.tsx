@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect, KeyboardEvent } from "react";
 
 type Direction = "up" | "right" | "down" | "left";
@@ -335,8 +336,21 @@ export default function Home() {
       {showSuccessModal ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
           <div className="w-full max-w-md rounded-3xl bg-zinc-950 p-6 shadow-2xl shadow-black/70">
-            <h2 className="text-2xl font-semibold text-emerald-300">Success!</h2>
-            <p className="mt-3 text-sm leading-6 text-zinc-200">
+            <div className="mb-4 flex items-center justify-center gap-4">
+              <Image src="/next.svg" alt="Success icon" width={40} height={40} className="invert" />
+              <h2 className="text-2xl font-semibold text-emerald-300">Success!</h2>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="rounded-3xl bg-zinc-900/80 p-4 text-center">
+                <Image src="/file.svg" alt="Beeper saved" width={48} height={48} className="mx-auto" />
+                <p className="mt-2 text-sm text-zinc-200">Beeper placed</p>
+              </div>
+              <div className="rounded-3xl bg-zinc-900/80 p-4 text-center">
+                <Image src="/globe.svg" alt="World reset" width={48} height={48} className="mx-auto" />
+                <p className="mt-2 text-sm text-zinc-200">World reset</p>
+              </div>
+            </div>
+            <p className="mt-4 text-sm leading-6 text-zinc-200">
               The robot dropped the beeper into the hole and the world was reset with new placements.
             </p>
             <button
